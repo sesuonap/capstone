@@ -11,7 +11,15 @@ def show
     @restaurant = Restaurant.find(restaurant_id)
     
     render 'show.json.jbuilder'
-end   
+end  
+
+def random 
+  # Create method to randomize restaurants and show 3 to page. 
+  @restaurants = Restaurant.order("RANDOM()").limit(3)
+
+  render 'index.json.jbuilder'
+end 
+
 
 
 
