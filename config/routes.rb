@@ -3,5 +3,6 @@ Rails.application.routes.draw do
   namespace :api do 
     get '/restaurants' => 'restaurants#index'
     get '/restaurants/random' => 'restaurants#random'
+    get '/restaurants/:id' => 'restaurants#show'
   end 
 end
