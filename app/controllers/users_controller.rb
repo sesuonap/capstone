@@ -5,12 +5,23 @@ class UsersController < ApplicationController
       first_name: params[:first_name],
       last_name: params[:last_name],
       email: params[:email],
-      password_digest: params[:password_digest],
+      password: params[:password],
+      password_confirmation: params[:password_confirmation],
       address: params[:address],
       city: params[:city],
       zip: params[:zip]
     )
+    if @user.save
+      render "show.json.jbuilder"
+    else
+      render json: {errors: @user.errors.full_messages}, status: :unprocessable_entity
+    end
+  end
 
-    @user.save 
-    render 'show.json.jbuilder'
+  # def update
+  #   user_id = params[:id]
+  #   @user = User.find(user_id)
+
+    
+  # end 
 end
