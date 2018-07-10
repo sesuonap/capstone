@@ -6,5 +6,6 @@ Rails.application.routes.draw do
     get '/restaurants' => 'restaurants#index'
     get '/restaurants/random' => 'restaurants#random'
     get '/restaurants/:id' => 'restaurants#show'
+    post '/pizzas' => 'pizzas#create'
   end 
 end
