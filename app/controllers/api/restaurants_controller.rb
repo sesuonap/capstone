@@ -14,7 +14,7 @@ def index
 
 response = Unirest.get(
                         "https://api.yelp.com/v3/businesses/search",
-                        headers: {"Authorization" => "Bearer S4UbtPRP3UufspNrT7qSHLzygIB0ZmPsaq4S4p9Yz_5GiHnp2R121AN9P08K0HzUcLKFZ7Ttg7bXpslgexQ8uz5wLm7ouwqshKsHJaxvMA_vlpxLYYUu7vU8_f5DW3Yx"},
+                        headers: {"Authorization" => "Bearer #{ENV['API_KEY']}"},
                         parameters: client_params
                       )
 
