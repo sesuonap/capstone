@@ -7,10 +7,8 @@ class UsersController < ApplicationController
       email: params[:email],
       password: params[:password],
       password_confirmation: params[:password_confirmation],
-      address: params[:address],
-      city: params[:city],
-      zip: params[:zip]
-    )
+      address: params[:address]
+y    )
     if @user.save
       render "show.json.jbuilder"
     else
