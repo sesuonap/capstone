@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180627233815) do
+ActiveRecord::Schema.define(version: 20180715191352) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20180627233815) do
     t.string "phone_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "url"
   end
 
   create_table "users", force: :cascade do |t|
@@ -63,6 +64,15 @@ ActiveRecord::Schema.define(version: 20180627233815) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "zip"
+  end
+
+  create_table "yelp_restaurants", force: :cascade do |t|
+    t.string "name"
+    t.string "rating"
+    t.string "address"
+    t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

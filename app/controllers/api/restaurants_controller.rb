@@ -1,49 +1,40 @@
 class Api::RestaurantsController < ApplicationController
 
 def index 
-  restaurants_arr = []
+#   @restaurants = []
 
-  client_params = {
-                  term: "dinner",
-                  location: "60654",
-                  limit: 50,
-                  price: "1,2",
-                  open_now: true,
-                  radius: 10000
-                  }
+#   client_params = {
+#                   term: "dinner",
+#                   location: "60654",
+#                   limit: 50,
+#                   price: "1,2",
+#                   open_now: true,
+#                   radius: 10000
+#                   }
 
-response = Unirest.get(
-                        "https://api.yelp.com/v3/businesses/search",
-                        headers: {"Authorization" => "Bearer #{ENV['API_KEY']}"},
-                        parameters: client_params
-                      )
+# response = Unirest.get(
+#                         "https://api.yelp.com/v3/businesses/search",
+#                         headers: {"Authorization" => "Bearer #{ENV['API_KEY']}"},
+#                         parameters: client_params
+#                       )
 
-@results = response.body
-
-
-@results['businesses'].sample(3).each do |restaurant|
-  @restaurant = {      
-                  "name" => restaurant['name'],
-                  "rating" => restaurant['rating'],
-                  "address" => restaurant['location']['display_address'],
-                  "url" => restaurant['url']
-                  }
+# results = response.body
 
 
-   restaurants_arr << @restaurant
-end 
+# results['businesses'].sample(3).each do |restaurant|
+#   restaurant = {      
+#                   "name" => restaurant['name'],
+#                   "rating" => restaurant['rating'],
+#                   "address" => restaurant['location']['display_address'],
+#                   "url" => restaurant['url']
+#                   }
 
- @restaurants = restaurants_arr
 
+#    @restaurants << restaurant
+# end 
 
+  @restaurants = Restaurant.all.sample(3)
 
-
-  # @restaurants = Restaurant.all
-
-  # if params[:random]
-  #   @restaurants = Restaurant.order("RANDOM()").limit(3)
-  # end
-  
   render 'index.json.jbuilder'
 end
 

@@ -43,6 +43,42 @@
 # r.save 
 
 
+# ----------------------------------------------------------------------------
+# Populate database with Axios Call from Yelp API
+client_params = {
+                  term: "dinner",
+                  location: "60654",
+                  limit: 50,
+                  price: "1,2",
+                  # open_at: 1531850400,
+                  radius: 10000
+                  }
+
+response = Unirest.get(
+                        "https://api.yelp.com/v3/businesses/search",
+                        headers: {"Authorization" => "Bearer #{ENV['API_KEY']}"},
+                        parameters: client_params
+                      )
+
+results = response.body
+
+results['businesses'].each_with_index do |restaurant, index|
+
+  restaurant_new = {      
+                  "name" => restaurant['name'],
+                  "star_rating" => restaurant['rating'],
+                  "price_rating" => restaurant['price'].length,
+                  "address" => restaurant["location"]['display_address'][0],
+                  "city" => restaurant["location"]['display_address'][1].split(",")[0],
+                  "zip" => restaurant["location"]['display_address'][1].split(" ")[-1],
+                  "url" => restaurant["url"],
+                  "phone_number" => restaurant['phone']
+                  }
+  # p restaurant_new
+
+  puts index if index % 10 == 0
+  Restaurant.create!(restaurant_new)
+end 
 
 
 

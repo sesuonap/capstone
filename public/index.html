@@ -28,10 +28,11 @@
   <script src="https://unpkg.com/axios/dist/axios.js"></script>
   <script src="index.js" defer></script>
 
+  <link href="css/main.css" rel="stylesheet" type="text/css">
+
   </head>
 
   <body id="page-top">
-    <div id="app">
     <!-- Navigation -->
     <a class="menu-toggle rounded" href="#">
       <i class="fa fa-bars"></i>
@@ -39,19 +40,19 @@
     <nav id="sidebar-wrapper">
       <ul class="sidebar-nav">
         <li class="sidebar-brand">
-          <a class="js-scroll-trigger" href="#">Menu</a>
+          <a id="sidebar-title" class="js-scroll-trigger" href="#">Pick or Pizza</a>
         </li>
         <li class="sidebar-nav-item">
-          <a class="js-scroll-trigger" href="#">Home</a>
+          <a class="js-scroll-trigger" href="/">Home</a>
         </li>
         <li class="sidebar-nav-item">
-          <a class="js-scroll-trigger" href="#">Pick</a>
+          <a class="js-scroll-trigger" href="/#/pick">Pick</a>
         </li>
         <li class="sidebar-nav-item">
           <a class="js-scroll-trigger" href="#">Account Info</a>
         </li>
         <li class="sidebar-nav-item">
-          <a class="js-scroll-trigger" href="#">Log In</a>
+          <a class="js-scroll-trigger" href="/#/login">Log In</a>
         </li>
         <li class="sidebar-nav-item">
           <a class="js-scroll-trigger" href="#">Sign Out</a>
@@ -60,7 +61,7 @@
     </nav>
 
     <!-- Header -->
-    <header class="masthead d-flex">
+    <!-- <header class="masthead d-flex">
       <div class="container text-center my-auto">
         <h1 class="mb-1">Pick <span id="smallOr">or</span> Pizza</h1>
         <h3 class="mb-5">
@@ -70,7 +71,8 @@
         <a class="btn btn-primary btn-xl js-scroll-trigger" href="#">Log In</a>
       </div>
       <div class="overlay"></div>
-    </header>
+    </header> -->
+    <div id="vue-app">
 
     <router-view></router-view>
 
@@ -88,3 +90,122 @@
   </body>
 
 </html>
+
+<template id="home-page">
+  <div class="vue-component">
+    <header class="masthead d-flex">
+      <div class="container text-center my-auto">
+        <h1 class="mb-1">Pick <span id="smallOr">or</span> Pizza</h1>
+        <h3 class="mb-5">
+          <em>A Revolutionary App for Indecisive People</em>
+        </h3>
+        <a href="/#/signup" class="btn btn-primary btn-xl js-scroll-trigger">Sign Up</a>
+        <a class="btn btn-primary btn-xl js-scroll-trigger" href="/#/login">Log In</a>
+      </div>
+      <div class="overlay"></div>
+    </header>
+  </div>
+</template>
+
+
+<template id="signup-page">
+  <div class="vue-component">
+
+    <div class="container">
+      <h1>Signup</h1>
+      <ul>
+        <li class="text-danger" v-for="error in errors">{{ error }}</li>
+      </ul>
+      <div class="form-group">
+        <label>First Name:</label> 
+        <input type="text" class="form-control" v-model="first_name">
+      </div>
+      <div class="form-group">
+        <label>Last Name:</label> 
+        <input type="text" class="form-control" v-model="last_name">
+      </div>
+      <div class="form-group">
+        <label>Email:</label>
+        <input type="email" class="form-control" v-model="email">
+      </div>
+      <div class="form-group">
+        <label>Address:</label>
+        <input type="text" class="form-control" v-model="address">
+      </div>
+      <div class="form-group">
+        <label>Password:</label>
+        <input type="password" class="form-control" v-model="password">
+      </div>
+      <div class="form-group">
+        <label>Password confirmation:</label>
+        <input type="password" class="form-control" v-model="passwordConfirmation">
+      </div>
+      <button class="btn btn-primary" v-on:click="submit()">Submit</button>
+    </div>
+
+  </div>
+</template>
+
+
+<template id="login-page">
+  <div class="vue-component">
+
+    <div class="container">
+      <h1>Login</h1>
+      <ul>
+        <li class="text-danger" v-for="error in errors">{{ error }}</li>
+      </ul>
+      <div class="form-group">
+        <label>Email:</label>
+        <input type="email" class="form-control" v-model="email">
+      </div>
+      <div class="form-group">
+        <label>Password:</label>
+        <input type="password" class="form-control" v-model="password">
+      </div>
+      <button class="btn btn-primary" v-on:click="submit()">Submit</button>
+    </div>
+
+  </div>
+</template>
+
+<template id="pick-button-page">
+  <!-- Choices page here -->
+  <div class="vue-component">
+    <header class="masthead d-flex">
+      <div class="container text-center my-auto">
+        <h1 class="mb-5">
+          <em>Time To Pick!</em>
+        </h1>
+        <a href="/#/choices" class="btn btn-primary btn-xl js-scroll-trigger">Go!</a>
+        
+      </div>
+      <div class="overlay"></div>
+    </header>
+  </div>
+</template>
+
+<template id="choices-page">
+  <div class="vue-component">
+    <div class="container">
+      <div class="justify-content-center">Timer: {{ countDown }} Seconds</div>
+      <div class="row choices-row">
+        <div v-for="restaurant in restaurants" class="col-md-4">
+          <div class="card shadow-lg p-3 mb-5 bg-salmon rounded">
+            <div class="card-body">
+              <h5 class="card-title" id="card-name">{{ restaurant.name }} </h5>
+              <p class="card-text">Rating: <span v-for="n in restaurant.star_rating" style="color: purple">★</p>
+              <p class="card-text">Price: <span v-for="n in restaurant.price_rating" style="color: green">$</p>
+              <p class="card-text">{{ restaurant.address }},{{ restaurant.city }} , {{ restaurant.zip }}</p>
+              <a v-bind:href="restaurant.url" class="btn btn-primary">Select</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+
+
+

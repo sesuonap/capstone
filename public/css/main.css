@@ -1,0 +1,28 @@
+body {
+  background-color: salmon;
+}
+
+#sidebar-title {
+  color: #3d7e9c;
+  font-size: 26px;
+  text-shadow: 2px 2px salmon;
+}
+
+.choices-row {
+  margin-top: 200px;
+  
+}
+
+.card {
+  background-color: #fffff0;
+  height: 300px;
+  
+
+}
+
+#card-name {
+  color: #F29C39;
+  font-size: 35px;
+  text-shadow: 2px 2px #2C5C71;
+  text-align: center;
+}
