@@ -65,7 +65,7 @@ var LoginPage = {
           axios.defaults.headers.common["Authorization"] =
             "Bearer " + response.data.jwt;
           localStorage.setItem("jwt", response.data.jwt);
-          router.push("/");
+          router.push("/pick");
         })
         .catch(
           function(error) {
@@ -75,6 +75,15 @@ var LoginPage = {
           }.bind(this)
         );
     }
+  }
+};
+
+var LogoutPage = {
+  template: "<h1>Logout</h1>",
+  created: function() {
+    axios.defaults.headers.common["Authorization"] = undefined;
+    localStorage.removeItem("jwt");
+    router.push("/");
   }
 };
 
@@ -126,6 +135,7 @@ var router = new VueRouter({
             { path: "/", component: HomePage },
             { path: "/signup", component: SignupPage },
             { path: "/login", component: LoginPage },
+            { path: "/logout", component: LogoutPage },
             { path: "/pick", component: PickButtonPage },
             { path: "/choices", component: ChoicesPage }
           ],

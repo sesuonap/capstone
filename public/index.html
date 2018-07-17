@@ -55,7 +55,7 @@
           <a class="js-scroll-trigger" href="/#/login">Log In</a>
         </li>
         <li class="sidebar-nav-item">
-          <a class="js-scroll-trigger" href="#">Sign Out</a>
+          <a class="js-scroll-trigger" href="#/logout">Sign Out</a>
         </li>
       </ul>
     </nav>
@@ -102,6 +102,7 @@
         <a href="/#/signup" class="btn btn-primary btn-xl js-scroll-trigger">Sign Up</a>
         <a class="btn btn-primary btn-xl js-scroll-trigger" href="/#/login">Log In</a>
       </div>
+
       <div class="overlay"></div>
     </header>
   </div>
@@ -177,6 +178,7 @@
         <h1 class="mb-5">
           <em>Time To Pick!</em>
         </h1>
+        <h4> You will have 45 seconds to make your selection</h4>
         <a href="/#/choices" class="btn btn-primary btn-xl js-scroll-trigger">Go!</a>
         
       </div>
@@ -192,12 +194,12 @@
       <div class="row choices-row">
         <div v-for="restaurant in restaurants" class="col-md-4">
           <div class="card shadow-lg p-3 mb-5 bg-salmon rounded">
-            <div class="card-body">
+            <div class="card-body d-flex flex-column">
               <h5 class="card-title" id="card-name">{{ restaurant.name }} </h5>
               <p class="card-text">Rating: <span v-for="n in restaurant.star_rating" style="color: purple">★</p>
               <p class="card-text">Price: <span v-for="n in restaurant.price_rating" style="color: green">$</p>
               <p class="card-text">{{ restaurant.address }},{{ restaurant.city }} , {{ restaurant.zip }}</p>
-              <a v-bind:href="restaurant.url" class="btn btn-primary">Select</a>
+              <a v-bind:href="restaurant.url" class="btn btn-primary mt-auto">Select</a>
             </div>
           </div>
         </div>
