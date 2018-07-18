@@ -48,9 +48,9 @@
         <li class="sidebar-nav-item">
           <a class="js-scroll-trigger" href="/#/pick">Pick</a>
         </li>
-        <li class="sidebar-nav-item">
+        <!-- <li class="sidebar-nav-item">
           <a class="js-scroll-trigger" href="#">Account Info</a>
-        </li>
+        </li> -->
         <li class="sidebar-nav-item">
           <a class="js-scroll-trigger" href="/#/login">Log In</a>
         </li>
@@ -94,7 +94,8 @@
 <template id="home-page">
   <div class="vue-component">
     <header class="masthead d-flex">
-      <div class="container text-center my-auto">
+      <div class="mainStuff container text-center my-auto">
+        <img id="pizzaSteve" src="/pizza-steve1.png">
         <h1 class="mb-1">Pick <span id="smallOr">or</span> Pizza</h1>
         <h3 class="mb-5">
           <em>A Revolutionary App for Indecisive People</em>
@@ -190,7 +191,7 @@
 <template id="choices-page">
   <div class="vue-component">
     <div class="container">
-      <div class="justify-content-center">Timer: {{ countDown }} Seconds</div>
+      <div class="justify-content-center" id="jsTimer">Pizza In: {{ countDown }} Seconds</div>
       <div class="row choices-row">
         <div v-for="restaurant in restaurants" class="col-md-4">
           <div class="card shadow-lg p-3 mb-5 bg-salmon rounded">
@@ -209,5 +210,22 @@
 </template>
 
 
-
+<template id="users-edit-page">
+  <div class="vue-conponent">
+    <h1>hi</h1>
+    {{ user }}
+    <div>
+      <p>{{ user.first_name }}</p>
+    </div>
+    <div>
+      <p>{{ user.last_name }}</p>
+    </div>
+    <div>
+      <p>{{ user.email }}</p>
+    </div>
+    <div>
+      <p>{{ user.address }}</p>
+    </div>
+  </div>
+</template>
 

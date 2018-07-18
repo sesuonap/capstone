@@ -45,6 +45,30 @@ var SignupPage = {
   }
 };
 
+var UsersEditPage = {
+  template: "#users-edit-page",
+  data: function() {
+    return {
+      user: {
+             first_name: "",
+             last_name: "",
+             email: "",
+             address: ""
+            }
+    }
+  },
+  created: function() {
+    axios
+    .get("/users/current")
+    .then(function(repsonse) {
+      this.user = response.data;
+    }.bind(this));
+  },
+  methods: {
+
+  }
+};
+
 var LoginPage = {
   template: "#login-page",
   data: function() {
@@ -114,14 +138,14 @@ var ChoicesPage = {
     .then(function(response) {
      this.restaurants = response.data; 
 
-     // this.intervalTimer = setInterval(function() {
-     //    this.countDown--;
-     //    if (this.countDown < 1) {
-     //      clearInterval(this.intervalTimer);
+     this.intervalTimer = setInterval(function() {
+        this.countDown--;
+        if (this.countDown < 1) {
+          clearInterval(this.intervalTimer);
 
-     //      window.location.href = "https://www.dominos.com/en/pages/order/#/locations/search/?type=Delivery";
-     //    }
-     // }.bind(this), 1000);
+          window.location.href = "https://www.dominos.com/en/pages/order/#/locations/search/?type=Delivery";
+        }
+     }.bind(this), 1000);
     }.bind(this));
 
   },
@@ -134,6 +158,7 @@ var router = new VueRouter({
   routes: [
             { path: "/", component: HomePage },
             { path: "/signup", component: SignupPage },
+            { path: "/users/edit", component: UsersEditPage },
             { path: "/login", component: LoginPage },
             { path: "/logout", component: LogoutPage },
             { path: "/pick", component: PickButtonPage },

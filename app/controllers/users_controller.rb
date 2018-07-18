@@ -16,10 +16,23 @@ class UsersController < ApplicationController
     end
   end
 
-  # def update
-  #   user_id = params[:id]
-  #   @user = User.find(user_id)
+  def show
+    puts "*******************"
+    p current_user
+    @user = current_user
+    render 'show.json.jbuilder'
+  end
 
-    
-  # end 
+  def update
+    @user = current_user
+
+    @user.first_name = params[:first_name] || @user.first_name
+    @user.first_name = params[:last_name] || @user.last_name
+    @user.first_name = params[:email] || @user.email
+    @user.first_name = params[:address] || @user.address
+
+    @user.save
+
+    render 'show.json.jbuilder'
+  end 
 end
